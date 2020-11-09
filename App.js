@@ -1,21 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React,{useEffect} from 'react';
+import { StyleSheet, Text, View,StatusBar } from 'react-native';
+import * as ScreenOrientation from 'expo-screen-orientation';
+
+
+
+// import component
+import Game1 from './Screen/Game1'
+
+// screen orientaion & status bar
+
 
 export default function App() {
+
+  useEffect(()=>{
+    StatusBar.setHidden(true)
+
+   
+    changeScreenOrientation();
+  },[])
+  
+  async function changeScreenOrientation() {
+    await ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+   <Game1 />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
